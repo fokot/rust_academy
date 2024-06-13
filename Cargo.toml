@@ -5,14 +5,21 @@ edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
+# cargo run --bin app
 [[bin]]
-name = "hello-world"
-path = "src/ratatui/01_basic.rs"
+name = "bas rustup toolchain list ic"
+path = "src/ratatui/basic/main.rs"
+
+# cargo run --bin counter
+[[bin]]
+name = "counter"
+path = "src/ratatui/counter/main.rs"
 
 #[[bin]]
 #name = "client"
 #path = "src/client/bin/main.rs"
 
 [dependencies]
+color-eyre = "0.6.3"
 crossterm = "0.27.0"
 ratatui = "0.26.1"

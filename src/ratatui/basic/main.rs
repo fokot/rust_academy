@@ -1,5 +1,3 @@
-mod tui;
-
 use crossterm::{
     event::{self, KeyCode, KeyEventKind},
     terminal::{
