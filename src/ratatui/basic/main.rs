@@ -22,7 +22,7 @@ fn main() -> Result<()> {
     loop {
         // draw the UI
         terminal.draw(|frame| {
-            let area = frame.size();
+            let area = frame.area();
             frame.render_widget(
                 Paragraph::new("Hello Ratatui! (press 'q' to quit)")
                     .white()

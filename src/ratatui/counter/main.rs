@@ -2,7 +2,7 @@ use crossterm::event::{self, Event, KeyCode, KeyEvent, KeyEventKind};
 use ratatui::{
     prelude::*,
     symbols::border,
-    widgets::{block::*, *},
+    widgets::*,
 };
 
 mod errors;
@@ -32,7 +32,7 @@ impl App {
     }
 
     fn render_frame(&self, frame: &mut Frame) {
-        frame.render_widget(self, frame.size());
+        frame.render_widget(self, frame.area());
     }
 
     /// updates the application's state based on user input
@@ -45,8 +45,7 @@ impl App {
                 .handle_key_event(key_event)
                 .wrap_err_with(|| format!("handling key event failed:\n{key_event:#?}")),
             _ => Ok(()),
-        };
-        Ok(())
+        }
     }
 
     fn handle_key_event(&mut self, key_event: KeyEvent) -> Result<()> {
@@ -80,22 +79,18 @@ impl App {
 
 impl Widget for &App {
     fn render(self, area: Rect, buf: &mut Buffer) {
-        let title = Title::from(" Counter App Tutorial ".bold());
-        let instructions = Title::from(Line::from(vec![
+        let title = Line::from(" Counter App Tutorial ".bold());
+        let instructions = Line::from(vec![
             " Decrement ".into(),
             "<Left>".blue().bold(),
             " Increment ".into(),
             "<Right>".blue().bold(),
             " Quit ".into(),
             "<Q> ".blue().bold(),
-        ]));
+        ]);
         let block = Block::default()
-            .title(title.alignment(Alignment::Center))
-            .title(
-                instructions
-                    .alignment(Alignment::Center)
-                    .position(Position::Bottom),
-            )
+            .title_top(title.centered())
+            .title_bottom(instructions.centered())
             .borders(Borders::ALL)
             .border_set(border::THICK);
 
